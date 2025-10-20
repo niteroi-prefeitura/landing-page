@@ -1,6 +1,7 @@
 ---
 const { title = "Gêmeo Digital" } = Astro.props;
 import "../styles/fonts.css";
+import ScrollReveal from "../components/ScrollReveal"
 ---
 
 <html lang="pt-BR" class="bg-background-landing text-text font-primary">
@@ -11,5 +12,5 @@ import "../styles/fonts.css";
   </head>
   <body class="md min-h-screen">
     <slot />
-  </body>
+    <ScrollReveal client:load/>
 </html>

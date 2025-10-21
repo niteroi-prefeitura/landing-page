@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#ffffff",
-        secundary: "#b4b4b4",
+        text: "#ffffff",
+        textMuted: "#b4b4b4",
 
         bus: {
           normal: {
@@ -55,22 +55,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    function ({ addUtilities }) {
-      const newUtilities = {
-        ".reveal": {
-          opacity: "0",
-          transform: "translateY(40px)",
-          filter: "blur(8px)",
-          transition: "all 0.8s cubic-bezier(0.22, 1, 0.36, 1)",
-        },
-        ".show": {
-          opacity: "1",
-          transform: "translateY(0)",
-          filter: "blur(0)",
-        },
-      };
-      addUtilities(newUtilities, ["responsive"]);
-    },
-  ],
+  plugins: [],
 };

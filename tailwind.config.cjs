@@ -4,27 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        text: "#ffffff",
-        textMuted: "#b4b4b4",
-
-        bus: {
-          normal: {
-            DEFAULT: "#336a16",
-            accent: "#559f06",
-          },
-          alert: {
-            DEFAULT: "rgba(229, 160, 0, 0.8)",
-            accent: "#ffaa00",
-          },
-          jammed: {
-            DEFAULT: "#b4631b",
-            accent: "#ff7700",
-          },
-          alert_jammed: {
-            DEFAULT: "#b4631b",
-            accent: "#ff7700",
-          },
-        },
+        primary: "#ffffff",
+        secundary: "#b4b4b4",
 
         highlight: {
           cyan: "#00d2f0",
@@ -43,10 +24,6 @@ module.exports = {
           landingButtonHover: "rgba(255, 255, 255, 0.3)",
         },
 
-        camera: {
-          DEFAULT: "#8583E3",
-          accent: "#A29BFE",
-        },
       },
       fontFamily: {
         primary: ['"IBM Plex Sans"', "sans-serif"],
@@ -56,4 +33,5 @@ module.exports = {
     },
   },
   plugins: [],
+  
 };

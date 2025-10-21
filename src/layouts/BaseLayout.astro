@@ -1,0 +1,41 @@
+---
+const { title = "Gêmeo Digital" } = Astro.props;
+import "../styles/global.css";
+---
+
+<html lang="pt-BR" class="bg-background-landing text-text font-primary">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+  </head>
+  <body class="md min-h-screen">
+    <slot />
+    <script is:inline>
+      (() => {
+        const init = () => {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("show");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.15 }
+          );
+
+          document
+            .querySelectorAll(".reveal")
+            .forEach((el) => observer.observe(el));
+        };
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", init);
+        } else {
+          init();
+        }
+      })();
+    </script>
+</html>

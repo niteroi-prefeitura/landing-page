@@ -1,0 +1,100 @@
+---
+const opcoesTema = [
+  {
+    icon: "/assets/icons/mob-landing.svg",
+    title: "Mobilidade Urbana",
+    text: "Coleta e integração de dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
+  },
+  {
+    icon: "/assets/icons/cloudy.svg",
+    title: "Resiliência Climática",
+    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
+  },
+  {
+    icon: "/assets/icons/investment.svg",
+    title: "Atração de Investimentos",
+    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
+  },
+  {
+    icon: "/assets/icons/art-culture.svg",
+    title: "Cultura",
+    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
+  },
+  {
+    icon: "/assets/icons/citzen-service.svg",
+    title: "Atendimento ao Cidadão",
+    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
+  },
+  {
+    icon: "/assets/icons/security.svg",
+    title: "Segurança Pública",
+    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
+  },
+];
+---
+
+<section
+  id="temas"
+  class="reveal relative bg-background-landing text-white px-6 py-12 md:px-20 lg:px-32 lg:py-24 flex flex-col items-center text-center"
+  aria-labelledby="temas-title"
+  aria-label="Temas do Gêmeo Digital de Niterói"
+>
+  <div class="absolute inset-0 bg-white/5"></div>
+
+  <div class="relative z-10 max-w-6xl w-full">
+    <header
+      class="sticky top-0 z-20 backdrop-blur-sm py-4
+             md:static md:bg-transparent md:backdrop-blur-none md:mb-14"
+    >
+      <h2 id="temas-title" class="font-alt text-3xl mb-4">
+        Temas do Gêmeo Digital de Niterói
+      </h2>
+    </header>
+    <p class="text-secundary mb-6">
+      Explore as diferentes áreas e aplicações do nosso gêmeo digital, cada uma
+      focada em aspectos específicos da gestão urbana.
+    </p>
+
+    <div
+      class="grid md:grid-cols-2 xl:grid-cols-3 gap-y-10 md:gap-x-8"
+      aria-label="Lista de temas e áreas do Gêmeo Digital"
+    >
+      {
+        opcoesTema.map(({ icon, title, text }) => (
+          <article
+            class="reveal bg-background-gray/10 p-6 hover:bg-background-gray/20 transition rounded-3xl lg:w-80 md:p-4 lg:p-6 flex flex-col justify-between"
+            aria-labelledby={`${title.replace(/\s+/g, "-").toLowerCase()}-title`}
+            aria-describedby={`${title.replace(/\s+/g, "-").toLowerCase()}-desc`}
+          >
+            <header class="flex items-center gap-2 mb-3 text-left">
+              <img src={icon} alt="" aria-hidden="true" class="h-8 w-8" />
+              <h3
+                id={`${title.replace(/\s+/g, "-").toLowerCase()}-title`}
+                class="text-lg font-semibold pt-2"
+              >
+                {title}
+              </h3>
+            </header>
+
+            <p
+              id={`${title.replace(/\s+/g, "-").toLowerCase()}-desc`}
+              class="text-secundary text-md leading-relaxed mb-6 text-left"
+            >
+              {text}
+            </p>
+
+            <footer>
+              <button
+                class="text-center gap-2 px-6 py-3 rounded-full border border-white
+                     hover:bg-highlight-cyan hover:text-background-landing hover:border-black transition
+                     mx-auto md:mx-0 w-10/12"
+              >
+                Explorar tema
+              </button>
+            </footer>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

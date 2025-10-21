@@ -1,3 +1,20 @@
+---
+const indicadores = [
+  {
+    value: "XX +",
+    label: "fontes de dados",
+  },
+  {
+    value: "24h",
+    label: "monitoramento",
+  },
+  {
+    value: "Tempo real",
+    label: "atualização",
+  },
+];
+---
+
 <section 
   class="relative flex justify-center items-center text-white bg-background-landing px-4 md:px-12 py-12 md:px20" 
   aria-label="Seção principal de apresentação do Gêmeo Digital"
@@ -11,7 +28,6 @@
       aria-labelledby="hero-title"
       aria-describedby="hero-description"
     >
-
       <header aria-label="Identidade visual">
         <img 
           src="/assets/images/gemeo-digital.svg" 
@@ -23,36 +39,6 @@
       <p id="hero-description" class="text-lg text-textMuted">
         Uma representação virtual dinâmica e interativa que integra dados em tempo real para planejar, monitorar e melhorar a vida urbana.
       </p>
-      
-      <nav class="hidden md:block" aria-label="Navegação principal">
-        <button
-          onclick="document.getElementById('temas').scrollIntoView({ behavior: 'smooth' })"
-          aria-label="Ir para a seção de temas"
-          class="flex items-center justify-center md:justify-start gap-2 px-6 py-3 rounded-full border border-white/20 bg-background-landingButton 
-                hover:bg-highlight-cyan hover:text-background-landing mt-6 mx-auto md:mx-0"
-        >
-          Ver nossos temas
-          <img src="/assets/icons/arrow_downward.svg" alt="" aria-hidden="true" class="h-5 w-5" />
-        </button>
-      </nav>
-
-      <section 
-        class="flex flex-col sm:flex-row justify-center md:justify-start gap-6 mt-6" 
-        aria-label="Indicadores de desempenho do Gêmeo Digital"
-      >
-        <div class="flex flex-col" aria-label="Quantidade de fontes de dados">
-          <h3 id="hero-title" class="text-highlight-cyan font-semibold text-xl">XX +</h3>
-          <p class="text-textMuted">fontes de dados</p>
-        </div>
-        <div class="flex flex-col" aria-label="Monitoramento 24 horas por dia">
-          <h3 class="text-highlight-cyan font-semibold text-xl">24h</h3>
-          <p class="text-textMuted">monitoramento</p>
-        </div>
-        <div class="flex flex-col" aria-label="Atualizações em tempo real">
-          <h3 class="text-highlight-cyan font-semibold text-xl">Tempo real</h3>
-          <p class="text-textMuted">atualização</p>
-        </div>
-      </section>
 
       <figure class="block md:hidden mt-6" aria-label="Visualização ilustrativa do Gêmeo Digital">
         <img 
@@ -66,8 +52,32 @@
         <button
           onclick="document.getElementById('temas').scrollIntoView({ behavior: 'smooth' })"
           aria-label="Ir para a seção de temas"
-          class="flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-white/20 bg-background-landingButton 
+          class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-white/20 bg-background-landingButton 
                 hover:bg-highlight-cyan hover:text-background-landing mt-6 mx-auto"
+        >
+          Ver nossos temas
+          <img src="/assets/icons/arrow_downward.svg" alt="" aria-hidden="true" class="h-5 w-5" />
+        </button>
+      </nav>
+
+      <section 
+        class="reveal flex flex-col sm:flex-row justify-center md:justify-start gap-6 mt-6" 
+        aria-label="Indicadores de desempenho do Gêmeo Digital"
+      >
+        {indicadores.map((item) => (
+          <div class="flex flex-col" aria-label={item.label}>
+            <h3 class="text-highlight-cyan font-semibold text-xl">{item.value}</h3>
+            <p class="text-textMuted">{item.label}</p>
+          </div>
+        ))}
+      </section>
+
+      <nav class="hidden md:block" aria-label="Navegação principal">
+        <button
+          onclick="document.getElementById('temas').scrollIntoView({ behavior: 'smooth' })"
+          aria-label="Ir para a seção de temas"
+          class="flex items-center justify-center md:justify-start gap-2 px-6 py-3 rounded-full border border-white/20 bg-background-landingButton 
+                hover:bg-highlight-cyan hover:text-background-landing mt-6 mx-auto md:mx-0"
         >
           Ver nossos temas
           <img src="/assets/icons/arrow_downward.svg" alt="" aria-hidden="true" class="h-5 w-5" />
@@ -76,7 +86,7 @@
     </article>
 
     <figure 
-      class="hidden md:flex justify-center md:justify-end order-1 md:order-2 w-full md:w-auto" 
+      class="reveal hidden md:flex justify-center md:justify-end order-1 md:order-2 w-full md:w-auto" 
       aria-label="Imagem ilustrativa principal do Gêmeo Digital"
     >
       <img 

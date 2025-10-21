@@ -1,32 +1,39 @@
 ---
+import iconDatabase from "../assets/icons/database.svg";
+import iconBarGraph from "../assets/icons/bar-graph.svg";
+import iconMap from "../assets/icons/map.svg";
+import iconBolt from "../assets/icons/bolt.svg";
+import iconShield from "../assets/icons/shield.svg";
+import iconWorld from "../assets/icons/world.svg";
+
 const opcoesHowItWorks = [
   {
-    icon: "/assets/icons/database.svg",
+    icon: iconDatabase,
     title: "Integração de dados",
     text: "Coleta e integração de dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
   },
   {
-    icon: "/assets/icons/bar-graph.svg",
+    icon: iconBarGraph,
     title: "Análise em Tempo Real",
     text: "Processamento e análise contínua de dados para insights imediatos sobre o funcionamento da cidade.",
   },
   {
-    icon: "/assets/icons/map.svg",
+    icon: iconMap,
     title: "Visualização 3D",
     text: "Modelo tridimensional interativo que representa fielmente a geografia e infraestrutura urbana.",
   },
   {
-    icon: "/assets/icons/bolt.svg",
+    icon: iconBolt,
     title: "Otimização Automática",
     text: "Algoritmos inteligentes que sugerem melhorias na gestão de recursos e planejamento urbano.",
   },
   {
-    icon: "/assets/icons/shield.svg",
+    icon: iconShield,
     title: "Monitoramento de Segurança",
     text: "Vigilância contínua da infraestrutura crítica e sistemas de emergência da cidade.",
   },
   {
-    icon: "/assets/icons/world.svg",
+    icon: iconWorld,
     title: "Sustentabilidade",
     text: "Análise do impacto ambiental e sugestões para desenvolvimento urbano sustentável.",
   },
@@ -53,32 +60,37 @@ const opcoesHowItWorks = [
       class="grid md:grid-cols-2 xl:grid-cols-3 gap-y-10 md:gap-x-8 justify-items-center"
       aria-label="Etapas e funcionalidades principais do Gêmeo Digital"
     >
-      {opcoesHowItWorks.map(({ icon, title, text }) => (
-        <article
-          class="reveal bg-background-landingThemes border border-background-gray hover:border-highlight-cyan transition
+      {
+        opcoesHowItWorks.map(({ icon, title, text }) => (
+          <article
+            class="reveal bg-background-landingThemes border border-background-gray hover:border-highlight-cyan transition
                  pt-4 pb-5 pl-5 rounded-3xl hover:bg-background-landingButton
                  text-left flex flex-col justify-start w-full sm:w-72 md:w-80 md:pt-3 md:pb-4 md:pr-2"
-          aria-labelledby={`${title.replace(/\s+/g, "-").toLowerCase()}-title`}
-          aria-describedby={`${title.replace(/\s+/g, "-").toLowerCase()}-desc`}
-        >
-          <header class="flex items-center gap-2 mb-3 mx-2" aria-label={`Bloco ${title}`}>
-            <img src={icon} alt="" aria-hidden="true" class="h-8 w-8" />
-            <h3
-              id={`${title.replace(/\s+/g, "-").toLowerCase()}-title`}
-              class="font-semibold text-lg text-left pt-1"
-            >
-              {title}
-            </h3>
-          </header>
-
-          <p
-            id={`${title.replace(/\s+/g, "-").toLowerCase()}-desc`}
-            class="text-secundary text-sm leading-relaxed w-11/12 ml-3"
+            aria-labelledby={`${title.replace(/\s+/g, "-").toLowerCase()}-title`}
+            aria-describedby={`${title.replace(/\s+/g, "-").toLowerCase()}-desc`}
           >
-            {text}
-          </p>
-        </article>
-      ))}
+            <header
+              class="flex items-center gap-2 mb-3 mx-2"
+              aria-label={`Bloco ${title}`}
+            >
+              <img src={icon.src} alt="" aria-hidden="true" class="h-8 w-8" />
+              <h3
+                id={`${title.replace(/\s+/g, "-").toLowerCase()}-title`}
+                class="font-semibold text-lg text-left pt-1"
+              >
+                {title}
+              </h3>
+            </header>
+
+            <p
+              id={`${title.replace(/\s+/g, "-").toLowerCase()}-desc`}
+              class="text-secundary text-sm leading-relaxed w-11/12 ml-3"
+            >
+              {text}
+            </p>
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>

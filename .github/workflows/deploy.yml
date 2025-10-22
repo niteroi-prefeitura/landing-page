@@ -3,7 +3,7 @@ name: Deploy Astro site to GitHub Pages
 on:
   push:
     branches:
-      - development  # ou main, conforme o branch que você quer publicar
+      - development
 
 permissions:
   contents: write

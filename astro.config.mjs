@@ -7,4 +7,7 @@ export default defineConfig({
       applyBaseStyles: true,
     }),
   ],
+  site: "https://prefeitura-niteroi.github.io/landing-page/",
+
+  base: "/landing-page/",
 });

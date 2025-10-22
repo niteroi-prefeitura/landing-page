@@ -1,41 +1,23 @@
 ---
-import iconMobLanding from "../assets/icons/mob-landing.svg";
 import iconCloudy from "../assets/icons/cloudy.svg";
-import iconInvestment from "../assets/icons/investment.svg";
-import iconArtCulture from "../assets/icons/art-culture.svg";
-import iconCitzenService from "../assets/icons/citzen-service.svg";
+import iconMobLanding from "../assets/icons/mob-landing.svg";
 import iconSecurity from "../assets/icons/security.svg";
 
 const opcoesTema = [
   {
     icon: iconMobLanding,
-    title: "Mobilidade Urbana",
-    text: "Coleta e integração de dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
+    title: "Dinâmico",
+    text: "Niterói é uma cidade em constante movimento, e o Gêmeo Digital integra dados de diversas fontes para apoiar decisões urbanas de forma ágil e precisa.",
   },
   {
     icon: iconCloudy,
-    title: "Resiliência Climática",
-    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
-  },
-  {
-    icon: iconInvestment,
-    title: "Atração de Investimentos",
-    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
-  },
-  {
-    icon: iconArtCulture,
-    title: "Cultura",
-    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
-  },
-  {
-    icon: iconCitzenService,
-    title: "Atendimento ao Cidadão",
-    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
+    title: "Vibrante",
+    text: "A cidade é cultural e socialmente rica. Nosso Gêmeo Digital ajuda a entender sua dinâmica, permitindo planejar eventos, serviços e infraestrutura de forma inteligente.",
   },
   {
     icon: iconSecurity,
-    title: "Segurança Pública",
-    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
+    title: "Seguro",
+    text: "Com foco na segurança e bem-estar da população, o Gêmeo Digital auxilia no monitoramento e na prevenção de riscos, tornando Niterói uma cidade mais segura e planejada.",
   },
 ];
 ---
@@ -73,7 +55,7 @@ const opcoesTema = [
             aria-labelledby={`${title.replace(/\s+/g, "-").toLowerCase()}-title`}
             aria-describedby={`${title.replace(/\s+/g, "-").toLowerCase()}-desc`}
           >
-            <header class="flex items-center gap-2 mb-3 text-left">
+            <header class="flex items-center gap-4 mb-3 text-left">
               <img src={icon.src} alt="" aria-hidden="true" class="h-8 w-8" />
               <h3
                 id={`${title.replace(/\s+/g, "-").toLowerCase()}-title`}
@@ -91,14 +73,28 @@ const opcoesTema = [
             </p>
 
             <footer>
-              <button
-                class="text-center gap-2 px-6 py-3 rounded-full border border-white
-                     hover:bg-highlight-cyan hover:text-background-landing hover:border-black transition
-                     mx-auto md:mx-0 w-10/12"
-              >
-                Explorar tema
-              </button>
-            </footer>
+  {title === "Dinâmico" ? (
+    <a
+      href="http://4.201.184.140/gemeo-digital/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-center gap-2 px-6 py-3 rounded-full border border-white
+             hover:bg-highlight-cyan hover:text-background-landing hover:border-black transition
+             mx-auto md:mx-0 w-10/12 inline-block"
+    >
+      Explorar tema
+    </a>
+  ) : (
+    <button
+      disabled
+      class="text-center gap-2 px-6 py-3 rounded-full border border-white
+             bg-white/20 text-white cursor-not-allowed hover:bg-white/20 transition
+             mx-auto md:mx-0 w-10/12"
+    >
+      Em breve
+    </button>
+  )}
+</footer>
           </article>
         ))
       }

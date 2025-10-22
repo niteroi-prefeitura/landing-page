@@ -1,41 +1,18 @@
 ---
-import iconMobLanding from "../assets/icons/mob-landing.svg";
 import iconCloudy from "../assets/icons/cloudy.svg";
-import iconInvestment from "../assets/icons/investment.svg";
-import iconArtCulture from "../assets/icons/art-culture.svg";
-import iconCitzenService from "../assets/icons/citzen-service.svg";
+import iconMobLanding from "../assets/icons/mob-landing.svg";
 import iconSecurity from "../assets/icons/security.svg";
 
 const opcoesTema = [
   {
     icon: iconMobLanding,
-    title: "Mobilidade Urbana",
-    text: "Coleta e integração de dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
+    title: "Dinâmico",
+    text: "Integração de informações em tempo real para otimizar a mobilidade urbana. Sensores de tráfego, localização de ônibus, câmeras de monitoramento, dados sobre chuva e incidentes de trânsito trabalham juntos para oferecer uma cidade mais conectada e eficiente.",
   },
   {
     icon: iconCloudy,
-    title: "Resiliência Climática",
-    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
-  },
-  {
-    icon: iconInvestment,
-    title: "Atração de Investimentos",
-    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
-  },
-  {
-    icon: iconArtCulture,
-    title: "Cultura",
-    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
-  },
-  {
-    icon: iconCitzenService,
-    title: "Atendimento ao Cidadão",
-    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
-  },
-  {
-    icon: iconSecurity,
-    title: "Segurança Pública",
-    text: "Coleta e integra dados de múltiplas fontes: sensores IoT, satélites, sistemas municipais e comportamento populacional.",
+    title: "Vibrante",
+    text: "Monitoramento contínuo dos indicadores ambientais que impactam a cidade. Sensores monitoram a qualidade do ar, pluviômetros registram chuvas, sistemas verificam o nível dos rios e sirenes emitem alertas preventivos. Tudo isso para tornar Niterói mais preparada, sustentável e segura diante dos desafios climáticos.",
   },
 ];
 ---
@@ -73,7 +50,7 @@ const opcoesTema = [
             aria-labelledby={`${title.replace(/\s+/g, "-").toLowerCase()}-title`}
             aria-describedby={`${title.replace(/\s+/g, "-").toLowerCase()}-desc`}
           >
-            <header class="flex items-center gap-2 mb-3 text-left">
+            <header class="flex items-center gap-4 mb-3 text-left">
               <img src={icon.src} alt="" aria-hidden="true" class="h-8 w-8" />
               <h3
                 id={`${title.replace(/\s+/g, "-").toLowerCase()}-title`}
@@ -91,14 +68,28 @@ const opcoesTema = [
             </p>
 
             <footer>
-              <button
-                class="text-center gap-2 px-6 py-3 rounded-full border border-white
-                     hover:bg-highlight-cyan hover:text-background-landing hover:border-black transition
-                     mx-auto md:mx-0 w-10/12"
-              >
-                Explorar tema
-              </button>
-            </footer>
+  {title === "Dinâmico" ? (
+    <a
+      href=""
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-center gap-2 px-6 py-3 rounded-full border border-white
+             hover:bg-highlight-cyan hover:text-background-landing hover:border-black transition
+             mx-auto md:mx-0 w-10/12 inline-block"
+    >
+      Explorar tema
+    </a>
+  ) : (
+    <button
+      disabled
+      class="text-center gap-2 px-6 py-3 rounded-full border border-white
+             bg-white/20 text-white cursor-not-allowed hover:bg-white/20 transition
+             mx-auto md:mx-0 w-10/12"
+    >
+      Em breve
+    </button>
+  )}
+</footer>
           </article>
         ))
       }

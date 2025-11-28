@@ -1,0 +1,238 @@
+---
+const { title = "Documentação" } = Astro.props;
+import "../styles/global.css";
+---
+<html lang="pt-BR" class="bg-background-landing text-primary">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+
+  <body class="min-h-screen relative">
+
+<button
+  id="toc-toggle"
+  aria-label="Abrir navegação"
+  class="lg:hidden fixed top-4 left-4 z-50 bg-background-button/70 backdrop-blur-md border border-white/10 p-3 rounded-full text-primary hover:bg-background-buttonHover transition-colors"
+>
+  <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2a10 10 0 100 20 10 10 0 000-20zm4.33 6.67l-2 6-6 2 2-6 6-2z"/>
+  </svg>
+
+  <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+  </svg>
+</button>
+
+
+<div class="flex">
+
+  <aside
+    id="docs-toc"
+    class="
+      not-prose
+      fixed top-0 left-0 z-40
+      w-80 h-full
+      bg-background-landing/95 backdrop-blur-md
+      border-r border-white/10
+      px-10 py-8
+      transform -translate-x-full lg:translate-x-0
+      transition-transform duration-300
+      overflow-y-auto
+    "
+    aria-hidden="true"
+  >
+
+    <div class="flex items-start justify-between mb-6">
+
+      <div class="flex flex-col gap-1">
+        <h2 class="text-white font-semibold text-lg">Navegação</h2>
+
+        <a 
+          href="/landing-page/"
+          class="text-highlight-cyan text-sm hover:underline"
+        >
+          ← Voltar à página inicial
+        </a>
+      </div>
+
+      <button 
+        id="toc-close-inside" 
+        aria-label="Fechar navegação" 
+        class="p-2 rounded-md text-white/80 hover:text-white/100 lg:hidden"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <nav id="toc-list" class="text-secundary text-sm flex flex-col gap-2">
+      <p>Carregando...</p>
+    </nav>
+  </aside>
+
+  <main id="docs-main" class="flex-1 lg:ml-80 mt-0 pl-6 lg:pl-16 py-12 pt-20 lg:pt-12 max-w-4xl prose prose-invert prose-lg">
+    <slot />
+  </main>
+
+</div>
+
+    <script is:inline>
+      (function () {
+        function slugify(s) {
+          return String(s || '')
+            .normalize('NFKD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/(^-|-$)/g, '');
+        }
+
+        const content = document.getElementById('docs-main') || document.querySelector('.prose');
+        const tocList = document.getElementById('toc-list');
+        const toc = document.getElementById('docs-toc');
+        const toggleBtn = document.getElementById('toc-toggle');
+        const iconOpen = document.getElementById('icon-open');
+        const iconClose = document.getElementById('icon-close');
+        const closeInside = document.getElementById('toc-close-inside');
+
+        if (!content || !tocList || !toc) return;
+
+        function initResponsive() {
+          if (window.innerWidth >= 1024) {
+            toc.classList.remove('-translate-x-full');
+            toc.setAttribute('aria-hidden', 'false');
+            if (toggleBtn) toggleBtn.classList.add('hidden');
+          } else {
+            if (!toc.classList.contains('-translate-x-full')) toc.classList.add('-translate-x-full');
+            toc.setAttribute('aria-hidden', 'true');
+            if (toggleBtn) toggleBtn.classList.remove('hidden');
+            if (iconOpen) iconOpen.classList.remove('hidden');
+            if (iconClose) iconClose.classList.add('hidden');
+          }
+        }
+
+        function buildToc() {
+          const headings = Array.from(content.querySelectorAll('h2, h3'));
+          tocList.innerHTML = '';
+
+          if (!headings.length) {
+            tocList.innerHTML = '<p class="text-secundary">Nenhum tópico encontrado</p>';
+            return;
+          }
+
+          headings.forEach(h => {
+            if (!h.id) {
+              let base = slugify(h.textContent || h.innerText || 'heading');
+              let unique = base, i = 1;
+              while (document.getElementById(unique)) unique = `${base}-${i++}`;
+              h.id = unique;
+            }
+
+            const a = document.createElement('a');
+            a.href = `#${h.id}`;
+            a.textContent = h.textContent.trim();
+            a.className = h.tagName === 'H3'
+            ? 'block py-1 pl-4 text-sm transition-colors text-secundary hover:text-highlight-cyan'
+            : 'block py-1 font-medium transition-colors text-secundary hover:text-highlight-cyan';
+
+
+            a.addEventListener('click', (ev) => {
+              ev.preventDefault();
+              const target = document.getElementById(h.id);
+              if (!target) return;
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              history.replaceState(null, '', `#${h.id}`);
+              if (window.innerWidth < 1024) {
+                toc.classList.add('-translate-x-full');
+                toc.setAttribute('aria-hidden', 'true');
+                if (toggleBtn) toggleBtn.classList.remove('hidden');
+                if (iconOpen) iconOpen.classList.remove('hidden');
+                if (iconClose) iconClose.classList.add('hidden');
+              }
+            });
+
+            tocList.appendChild(a);
+          });
+
+          const tocLinks = Array.from(tocList.querySelectorAll('a'));
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const id = entry.target.id;
+                tocLinks.forEach(link => {
+                  const isActive = link.getAttribute('href') === `#${id}`;
+                  a.classList.toggle('text-highlight-cyan', active);
+                  a.classList.toggle('text-secundary', !active);
+                });
+              }
+            });
+          }, { root: null, rootMargin: '0px 0px -60% 0px', threshold: 0 });
+
+          headings.forEach(h => observer.observe(h));
+        }
+
+        function toggleSidebar() {
+          const open = toc.classList.contains('-translate-x-full');
+          if (open) {
+            toc.classList.remove('-translate-x-full');
+            toc.setAttribute('aria-hidden', 'false');
+            if (toggleBtn) toggleBtn.classList.add('hidden');
+            if (iconOpen) iconOpen.classList.add('hidden');
+            if (iconClose) iconClose.classList.remove('hidden');
+          } else {
+            toc.classList.add('-translate-x-full');
+            toc.setAttribute('aria-hidden', 'true');
+            if (toggleBtn) toggleBtn.classList.remove('hidden');
+            if (iconOpen) iconOpen.classList.remove('hidden');
+            if (iconClose) iconClose.classList.add('hidden');
+          }
+        }
+
+        if (toggleBtn) toggleBtn.addEventListener('click', toggleSidebar);
+        if (closeInside) closeInside.addEventListener('click', () => {
+          toc.classList.add('-translate-x-full');
+          toc.setAttribute('aria-hidden', 'true');
+          if (toggleBtn) toggleBtn.classList.remove('hidden');
+          if (iconOpen) iconOpen.classList.remove('hidden');
+          if (iconClose) iconClose.classList.add('hidden');
+        });
+
+        initResponsive();
+        buildToc();
+
+        let rto;
+        window.addEventListener('resize', () => {
+          clearTimeout(rto);
+          rto = setTimeout(() => {
+            initResponsive();
+          }, 120);
+        });
+
+        document.addEventListener("click", (ev) => {
+        const clickedInsideToc = toc.contains(ev.target);
+        const clickedButton = toggleBtn && toggleBtn.contains(ev.target);
+
+        if (
+            window.innerWidth < 1024 &&
+            !clickedInsideToc &&
+            !clickedButton &&
+            !toc.classList.contains("-translate-x-full")
+        ) {
+            toc.classList.add("-translate-x-full");
+            toc.setAttribute("aria-hidden", "true");
+
+            if (toggleBtn) toggleBtn.classList.remove("hidden");
+            if (iconOpen) iconOpen.classList.remove("hidden");
+            if (iconClose) iconClose.classList.add("hidden");
+        }
+        });
+      })();
+    </script>
+
+  </body>
+</html>

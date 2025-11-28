@@ -61,18 +61,18 @@ const indicadores = [
         class="flex flex-col md:hidden"
         aria-label="Navegação principal em dispositivos móveis"
       >
-        <button
-          onclick="document.getElementById('temas').scrollIntoView({ behavior: 'smooth' })"
-          aria-label="Ir para a seção de temas"
+        <a
+          href="https://dados-app.niteroi.rj.gov.br/gemeo-digital/"
+          aria-label="Ir para a aplicação"
           class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full
                 border border-white/20 bg-background-landingButton
                 hover:bg-highlight-cyan hover:text-background-landing mt-6 mx-auto"
         >
-          Ver nossos temas
+          Visite a aplicação
           <img src={arrowDown.src} alt="" aria-hidden="true" class="h-5 w-5" />
-        </button>
+        </a>
 
-        <button
+        <a
           onclick="window.location.href='doc'"
           aria-label="Acessar documentação do Gêmeo Digital"
           class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full
@@ -81,7 +81,7 @@ const indicadores = [
         >
           Documentação
           <img src={arrowDown.src} aria-hidden="true" class="h-5 w-5 -rotate-90" />
-        </button>
+        </a>
       </nav>
 
       <section
@@ -101,26 +101,27 @@ const indicadores = [
       </section>
 
       <nav class="hidden md:flex gap-4" aria-label="Navegação principal">
-        <button
-          onclick="document.getElementById('temas').scrollIntoView({ behavior: 'smooth' })"
-          aria-label="Ir para a seção de temas"
-          class="flex items-center justify-center md:justify-start gap-2 px-6 py-3 rounded-full border border-white/20 bg-background-landingButton
-                hover:bg-highlight-cyan hover:text-background-landing mt-6 mx-auto md:mx-0"
+        <a
+          href="https://dados-app.niteroi.rj.gov.br/gemeo-digital/"
+          aria-label="Ir para a aplicação"
+          class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full
+                border border-white/20 bg-background-landingButton
+                hover:bg-highlight-cyan hover:text-background-landing mt-4 mx-auto"
         >
-          Ver nossos temas
-          <img src={arrowDown.src} alt="" aria-hidden="true" class="h-5 w-5" />
-        </button>
+          Visite a nossa aplicação
+          <img src={arrowDown.src} alt="" aria-hidden="true" class="h-5 w-5 rotate-180" />
+        </a>
         
-        <button
+        <a
           onclick="window.location.href='doc'"
           aria-label="Acessar documentação do Gêmeo Digital"
           class="btn-hero flex items-center justify-center gap-2 px-6 py-3 rounded-full
                 border border-white/20 bg-background-landingButton
-                hover:bg-highlight-cyan hover:text-background-landing transition mt-6"
+                hover:bg-highlight-cyan hover:text-background-landing transition mt-4"
         >
           Documentação
           <img src={arrowDown.src} aria-hidden="true" class="h-5 w-5 -rotate-90" />
-        </button>
+        </a>
       </nav>
     </article>
 
@@ -138,3 +139,32 @@ const indicadores = [
     </figure>
   </div>
 </section>
+<script>
+  const STORAGE_KEY = "gdn_fontes_dados_contador";
+
+  let contador = 86400;
+
+  const salvo = localStorage.getItem(STORAGE_KEY);
+  if (salvo) {
+    contador = Number(salvo);
+  } else {
+    localStorage.setItem(STORAGE_KEY, contador.toString());
+  }
+
+  function atualizarHero() {
+    const cards = document.querySelectorAll(
+      "[aria-label='fontes de dados'] h3"
+    );
+    cards.forEach((el) => {
+      el.textContent = `${contador} +`;
+    });
+  }
+
+  atualizarHero();
+
+  setInterval(() => {
+    contador++;
+    localStorage.setItem(STORAGE_KEY, contador.toString());
+    atualizarHero();
+  }, 30000);
+</script>

@@ -58,17 +58,29 @@ const indicadores = [
       </figure>
 
       <nav
-        class="block md:hidden"
+        class="flex flex-col md:hidden"
         aria-label="Navegação principal em dispositivos móveis"
       >
         <button
           onclick="document.getElementById('temas').scrollIntoView({ behavior: 'smooth' })"
           aria-label="Ir para a seção de temas"
-          class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-white/20 bg-background-landingButton
+          class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full
+                border border-white/20 bg-background-landingButton
                 hover:bg-highlight-cyan hover:text-background-landing mt-6 mx-auto"
         >
           Ver nossos temas
           <img src={arrowDown.src} alt="" aria-hidden="true" class="h-5 w-5" />
+        </button>
+
+        <button
+          onclick="window.location.href='doc'"
+          aria-label="Acessar documentação do Gêmeo Digital"
+          class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full
+                border border-white/20 bg-background-landingButton
+                hover:bg-highlight-cyan hover:text-background-landing transition mt-6 mx-auto"
+        >
+          Documentação
+          <img src={arrowDown.src} aria-hidden="true" class="h-5 w-5 -rotate-90" />
         </button>
       </nav>
 
@@ -88,7 +100,7 @@ const indicadores = [
         }
       </section>
 
-      <nav class="hidden md:block" aria-label="Navegação principal">
+      <nav class="hidden md:flex gap-4" aria-label="Navegação principal">
         <button
           onclick="document.getElementById('temas').scrollIntoView({ behavior: 'smooth' })"
           aria-label="Ir para a seção de temas"
@@ -97,6 +109,17 @@ const indicadores = [
         >
           Ver nossos temas
           <img src={arrowDown.src} alt="" aria-hidden="true" class="h-5 w-5" />
+        </button>
+        
+        <button
+          onclick="window.location.href='doc'"
+          aria-label="Acessar documentação do Gêmeo Digital"
+          class="btn-hero flex items-center justify-center gap-2 px-6 py-3 rounded-full
+                border border-white/20 bg-background-landingButton
+                hover:bg-highlight-cyan hover:text-background-landing transition mt-6"
+        >
+          Documentação
+          <img src={arrowDown.src} aria-hidden="true" class="h-5 w-5 -rotate-90" />
         </button>
       </nav>
     </article>

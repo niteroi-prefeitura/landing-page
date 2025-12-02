@@ -26,14 +26,14 @@ import "../styles/global.css";
 </button>
 
 
-<div class="flex">
+<div class="flex m-auto">
 
   <aside
     id="docs-toc"
     class="
       not-prose
-      fixed top-0 left-0 z-40
-      w-80 h-full
+      fixed top-0 left-0
+      lg:w-96 md:h-full
       bg-background-landing/95 backdrop-blur-md
       border-r border-white/10
       px-10 py-8
@@ -74,7 +74,12 @@ import "../styles/global.css";
     </nav>
   </aside>
 
-  <main id="docs-main" class="flex-1 lg:ml-80 mt-0 pl-6 lg:pl-16 py-12 pt-20 lg:pt-12 max-w-4xl prose prose-invert prose-lg">
+  <main 
+    id="docs-main"
+    class="flex-1 m-auto mt-0
+          px-6 py-12 pt-16 lg:pt-12
+          max-w-4xl
+          prose prose-invert prose-docs">
     <slot />
   </main>
 
@@ -117,7 +122,7 @@ import "../styles/global.css";
         }
 
         function buildToc() {
-          const headings = Array.from(content.querySelectorAll('h2, h3'));
+          const headings = Array.from(content.querySelectorAll('h1, h2, h3'));
           tocList.innerHTML = '';
 
           if (!headings.length) {
@@ -145,7 +150,7 @@ import "../styles/global.css";
               ev.preventDefault();
               const target = document.getElementById(h.id);
               if (!target) return;
-              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              target.scrollIntoView({ behavior: 'smooth', block: 'center' });
               history.replaceState(null, '', `#${h.id}`);
               if (window.innerWidth < 1024) {
                 toc.classList.add('-translate-x-full');

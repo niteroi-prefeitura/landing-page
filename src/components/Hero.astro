@@ -7,7 +7,7 @@ import { Image } from "astro:assets";
 const indicadores = [
   {
     value: "XX +",
-    label: "fontes de dados",
+    label: "interações de dados",
   },
   {
     value: "24h",
@@ -21,7 +21,7 @@ const indicadores = [
 ---
 
 <section
-  class="relative flex justify-center items-center text-white bg-background-landing px-4 md:px-12 py-12 md:px20"
+  class="relative flex justify-center items-center text-white bg-background-landing px-4 py-12"
   aria-label="Seção principal de apresentação do Gêmeo Digital"
 >
   <div
@@ -53,7 +53,7 @@ const indicadores = [
         <img
           src={ilustracao.src}
           alt="Ilustração representando o conceito do Gêmeo Digital"
-          class="h-64 w-auto mx-auto"
+          class="h-44 mx-auto"
         />
       </figure>
 
@@ -75,7 +75,7 @@ const indicadores = [
         <a
           onclick="window.location.href='doc'"
           aria-label="Acessar documentação do Gêmeo Digital"
-          class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full
+          class="reveal flex items-center justify-center gap-2 px-8 py-3 rounded-full
                 border border-white/20 bg-background-landingButton
                 hover:bg-highlight-cyan hover:text-background-landing transition mt-6 mx-auto"
         >
@@ -106,7 +106,7 @@ const indicadores = [
           aria-label="Ir para a aplicação"
           class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full
                 border border-white/20 bg-background-landingButton
-                hover:bg-highlight-cyan hover:text-background-landing mt-4 mx-auto"
+                hover:bg-highlight-cyan hover:text-background-landing mt-4"
         >
           Visite a nossa aplicação
           <img src={arrowDown.src} alt="" aria-hidden="true" class="h-5 w-5 rotate-180" />
@@ -115,12 +115,13 @@ const indicadores = [
         <a
           onclick="window.location.href='doc'"
           aria-label="Acessar documentação do Gêmeo Digital"
-          class="btn-hero flex items-center justify-center gap-2 px-6 py-3 rounded-full
-                border border-white/20 bg-background-landingButton
-                hover:bg-highlight-cyan hover:text-background-landing transition mt-4"
+          class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full
+                 border border-white/20 bg-background-landingButton
+                 hover:cursor-pointer
+                 hover:bg-highlight-cyan hover:text-background-landing mt-4"
         >
           Documentação
-          <img src={arrowDown.src} aria-hidden="true" class="h-5 w-5 -rotate-90" />
+          <img src={arrowDown.src} alt="" aria-hidden="true" class="h-5 w-5 -rotate-90" />
         </a>
       </nav>
     </article>
@@ -134,37 +135,34 @@ const indicadores = [
         alt="Ilustração do Gêmeo Digital mostrando uma cidade conectada por dados"
         class="w-auto mx-auto md:mx-0"
         format="avif"
-        widths={[400, 800, 1200]}
       />
     </figure>
   </div>
 </section>
 <script>
-  const STORAGE_KEY = "gdn_fontes_dados_contador";
+  const DATA_BASE = new Date("2025-11-01T00:00:00Z").getTime();  
 
-  let contador = 86400;
-
-  const salvo = localStorage.getItem(STORAGE_KEY);
-  if (salvo) {
-    contador = Number(salvo);
-  } else {
-    localStorage.setItem(STORAGE_KEY, contador.toString());
+  const INTERVALO = 30 * 1000;
+  function getContadorInicial() {
+    const agora = Date.now();
+    const diff = agora - DATA_BASE;
+    return Math.floor(diff / INTERVALO);
   }
 
+  let contador = getContadorInicial();
+
   function atualizarHero() {
-    const cards = document.querySelectorAll(
-      "[aria-label='fontes de dados'] h3"
-    );
+    const cards = document.querySelectorAll("[aria-label='interações de dados'] h3");
     cards.forEach((el) => {
-      el.textContent = `${contador} +`;
+      el.textContent = `${contador.toLocaleString("pt-BR")} +`;
     });
   }
 
   atualizarHero();
 
+ 
   setInterval(() => {
     contador++;
-    localStorage.setItem(STORAGE_KEY, contador.toString());
     atualizarHero();
-  }, 30000);
+  }, INTERVALO);
 </script>

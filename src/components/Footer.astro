@@ -11,12 +11,10 @@ import logoGemeoMob from "../assets/images/logo-gemeo-mob.svg";
 >
   <section class="flex flex-col relative w-full max-w-7xl mx-auto">
 
-    <!-- TOPO DO FOOTER: 3 COLUNAS -->
     <div
       class="flex flex-col mb-12 mt-4 w-full gap-20 justify-evenly
              md:flex-row lg:pl-12 md:pr-16"
     >
-      <!-- LOGO (ESQUERDA) -->
       <figure
         class="flex justify-center md:justify-start"
         aria-label="Logo institucional"
@@ -24,16 +22,15 @@ import logoGemeoMob from "../assets/images/logo-gemeo-mob.svg";
         <img
           src={logoGemeoMob.src}
           alt="Logo do Gêmeo Digital de Niterói"
-          class="h-24 w-auto md:h-24 lg:h-32 md:mx-8"
+          class="h-24 w-auto lg:h-32 md:mx-8"
         />
       </figure>
 
-      <!-- LINKS ÚTEIS (MEIO) -->
       <nav
         class="flex flex-col text-left text-white min-w-[180px]"
         aria-label="Links Úteis"
       >
-        <h2 class="font-semibold text-base mb-3">Links úteis</h2>
+        <h2 class="font-semibold text-xl mb-3">Links úteis</h2>
 
        <ul class="flex flex-col gap-2 text-sm">
           <li>
@@ -84,12 +81,11 @@ import logoGemeoMob from "../assets/images/logo-gemeo-mob.svg";
         </ul>
       </nav>
 
-      <!-- CONTATO (DIREITA) -->
       <address
-        class="flex flex-col gap-3 not-italic text-left text-white mr-32"
+        class="flex flex-col gap-3 not-italic text-left text-white xl:mr-32"
         aria-labelledby="footer-title"
       >
-        <h2 class="font-semibold text-base mb-1">Contato</h2>
+        <h2 class="font-semibold text-xl mb-1">Contato</h2>
 
         <div class="flex items-center gap-2">
           <img
@@ -118,18 +114,14 @@ import logoGemeoMob from "../assets/images/logo-gemeo-mob.svg";
       </address>
     </div>
 
-    <!-- LINHA DIVISÓRIA -->
     <div class="h-[1px] w-full bg-primary/30 mb-8" aria-hidden="true"></div>
 
-    <!-- RODAPÉ FINAL -->
     <nav
       class="flex flex-col md:flex-row justify-between items-center text-center gap-6 text-white/80 font-primary"
       aria-label="Links institucionais e direitos autorais"
     >
       <div class="flex flex-wrap justify-center md:justify-start gap-4 text-xs md:text-sm">
         <p>© 2025 Gêmeo Digital de Niterói. Todos os direitos reservados.</p>
-
-        <!-- GitHub pequeno no fim (opcional) -->
         
       </div>
 

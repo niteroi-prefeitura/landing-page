@@ -62,7 +62,7 @@ const indicadores = [
         aria-label="Navegação principal em dispositivos móveis"
       >
         <a
-          href="https://dados-app.niteroi.rj.gov.br/gemeo-digital/"
+          href="https://gemeo.niteroi.rj.gov.br/dinamico"
           aria-label="Ir para a aplicação"
           class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full
                 border border-white/20 bg-background-landingButton
@@ -80,7 +80,11 @@ const indicadores = [
                 hover:bg-highlight-cyan hover:text-background-landing transition mt-6 mx-auto"
         >
           Documentação
-          <img src={arrowDown.src} aria-hidden="true" class="h-5 w-5 -rotate-90" />
+          <img
+            src={arrowDown.src}
+            aria-hidden="true"
+            class="h-5 w-5 -rotate-90"
+          />
         </a>
       </nav>
 
@@ -102,16 +106,21 @@ const indicadores = [
 
       <nav class="hidden md:flex gap-4" aria-label="Navegação principal">
         <a
-          href="https://dados-app.niteroi.rj.gov.br/gemeo-digital/"
+          href="https://gemeo.niteroi.rj.gov.br/dinamico"
           aria-label="Ir para a aplicação"
           class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full
                 border border-white/20 bg-background-landingButton
                 hover:bg-highlight-cyan hover:text-background-landing mt-4"
         >
           Visite a nossa aplicação
-          <img src={arrowDown.src} alt="" aria-hidden="true" class="h-5 w-5 rotate-180" />
+          <img
+            src={arrowDown.src}
+            alt=""
+            aria-hidden="true"
+            class="h-5 w-5 rotate-180"
+          />
         </a>
-        
+
         <a
           onclick="window.location.href='doc'"
           aria-label="Acessar documentação do Gêmeo Digital"
@@ -121,7 +130,12 @@ const indicadores = [
                  hover:bg-highlight-cyan hover:text-background-landing mt-4"
         >
           Documentação
-          <img src={arrowDown.src} alt="" aria-hidden="true" class="h-5 w-5 -rotate-90" />
+          <img
+            src={arrowDown.src}
+            alt=""
+            aria-hidden="true"
+            class="h-5 w-5 -rotate-90"
+          />
         </a>
       </nav>
     </article>
@@ -140,7 +154,7 @@ const indicadores = [
   </div>
 </section>
 <script>
-  const DATA_BASE = new Date("2025-11-01T00:00:00Z").getTime();  
+  const DATA_BASE = new Date("2025-11-01T00:00:00Z").getTime();
 
   const INTERVALO = 30 * 1000;
   function getContadorInicial() {
@@ -152,7 +166,9 @@ const indicadores = [
   let contador = getContadorInicial();
 
   function atualizarHero() {
-    const cards = document.querySelectorAll("[aria-label='interações de dados'] h3");
+    const cards = document.querySelectorAll(
+      "[aria-label='interações de dados'] h3"
+    );
     cards.forEach((el) => {
       el.textContent = `${contador.toLocaleString("pt-BR")} +`;
     });
@@ -160,7 +176,6 @@ const indicadores = [
 
   atualizarHero();
 
- 
   setInterval(() => {
     contador++;
     atualizarHero();

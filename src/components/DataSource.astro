@@ -1,0 +1,121 @@
+---
+import iconAlert from "../assets/icons/alert.svg";
+import iconBuilding from "../assets/icons/building.svg";
+import iconBus from "../assets/icons/bus.svg";
+import iconCamera from "../assets/icons/camera.svg";
+import iconRain from "../assets/icons/rain.svg";
+import iconTraffic from "../assets/icons/traffic.svg";
+
+const dataSources = [
+  {
+    icon: iconBus,
+    title: "Ônibus Municipais",
+    subtitle: "MobNit — Secretaria Municipal de Mobilidade Urbana (SEMOBI)",
+    text:
+      "Posição a cada 30 segundos, linha, sentido, rota e paradas. Apenas linhas TransOceânica e TransNit.",
+  },
+  {
+    icon: iconAlert,
+    title: "Alertas de Trânsito",
+    subtitle: "Waze for Cities — Integrado ao Escritório de Dados",
+    text:
+      "Atualização a cada 2 minutos com tipo, subtipo e localização georreferenciada.",
+  },
+  {
+    icon: iconTraffic,
+    title: "Tráfego / Fluxo Viário",
+    subtitle: "Waze for Cities — Integrado ao Escritório de Dados",
+    text:
+      "Velocidade média e retenção das vias, atualizados continuamente.",
+  },
+  {
+    icon: iconCamera,
+    title: "Câmeras Urbanas",
+    subtitle: "NitTrans — Niterói Transporte e Trânsito",
+    text:
+      "Localização das câmeras e último minuto de vídeo disponível.",
+  },
+  {
+    icon: iconRain,
+    title: "Pluviômetros",
+    subtitle: "SVIDA — Defesa Civil e Redução de Riscos (SMCDR)",
+    text:
+      "Níveis de chuva (15 min), Voronoi e impacto por bacia hidrográfica.",
+  },
+  {
+    icon: iconBuilding,
+    title: "Edificações 3D",
+    subtitle: "SMU — Secretaria Municipal de Urbanismo",
+    text:
+      "Modelo 3D mapeado com LiDAR, incluindo topografia e estruturas urbanas.",
+  },
+];
+
+---
+
+<section
+  id="data-sources"
+  class="reveal relative bg-background-landing text-white px-6 py-24 flex flex-col items-center text-center"
+  aria-labelledby="data-sources-title"
+  aria-label="Fontes de dados utilizadas no Gêmeo Digital"
+>
+  <div class="relative z-10 max-w-6xl w-full">
+    <header
+      class="sticky top-0 z-20 backdrop-blur-sm py-4
+             md:static md:backdrop-blur-none"
+    >
+      <h2 id="data-sources-title" class="font-alt text-3xl">
+        Fontes de Dados utilizadas no Gêmeo Digital
+      </h2>
+    </header>
+      <p class="text-secundary mb-12 max-w-2xl mx-auto mt-2 text-sm">
+        Dados oficiais integrados, processados pelo backend e transmitidos em tempo real
+        para garantir uma representação precisa da cidade.
+      </p>
+    
+
+    <div
+      class="grid md:grid-cols-2 xl:grid-cols-3 gap-y-10 md:gap-x-8 justify-items-center"
+      aria-label="Fontes de dados do Gêmeo Digital"
+    >
+      {
+        dataSources.map(({ icon, title, subtitle, text }) => (
+          <article
+            class="reveal bg-background-landingThemes border border-background-gray hover:border-highlight-cyan transition
+                   pt-4 pb-5 pl-5 rounded-3xl hover:bg-background-landingButton
+                   text-left flex flex-col justify-start w-full sm:w-72 md:w-80 md:pt-3 md:pb-4 md:pr-2"
+            aria-labelledby={`${title.replace(/\s+/g, "-").toLowerCase()}-title`}
+            aria-describedby={`${title.replace(/\s+/g, "-").toLowerCase()}-desc`}
+          >
+             <header
+              class="flex items-center gap-2 mb-2 mx-2"
+              aria-label={`Fonte de dados ${title}`}
+            >
+              <img src={icon.src} alt="" aria-hidden="true" class="h-8 w-8" />
+              <div>
+                <h3
+                  id={`${title.replace(/\s+/g, "-").toLowerCase()}-title`}
+                  class="font-semibold text-lg text-left"
+                >
+                  {title}
+                </h3>
+
+                <p class="text-xs text-secundary/80 mt-0.5">
+                  {subtitle}
+                </p>
+              </div>
+            </header>
+
+
+            <p
+              id={`${title.replace(/\s+/g, "-").toLowerCase()}-desc`}
+              class="text-secundary text-sm leading-relaxed w-11/12 ml-3"
+            >
+              {text}
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -7,7 +7,7 @@ import { Image } from "astro:assets";
 const indicadores = [
   {
     value: "XX +",
-    label: "fontes de dados",
+    label: "interações de dados",
   },
   {
     value: "24h",
@@ -21,7 +21,7 @@ const indicadores = [
 ---
 
 <section
-  class="relative flex justify-center items-center text-white bg-background-landing px-4 md:px-12 py-12 md:px20"
+  class="relative flex justify-center items-center text-white bg-background-landing px-4 py-12"
   aria-label="Seção principal de apresentação do Gêmeo Digital"
 >
   <div
@@ -53,23 +53,39 @@ const indicadores = [
         <img
           src={ilustracao.src}
           alt="Ilustração representando o conceito do Gêmeo Digital"
-          class="h-64 w-auto mx-auto"
+          class="h-44 mx-auto"
         />
       </figure>
 
       <nav
-        class="block md:hidden"
+        class="flex flex-col md:hidden"
         aria-label="Navegação principal em dispositivos móveis"
       >
-        <button
-          onclick="document.getElementById('temas').scrollIntoView({ behavior: 'smooth' })"
-          aria-label="Ir para a seção de temas"
-          class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-white/20 bg-background-landingButton
+        <a
+          href="https://gemeo.niteroi.rj.gov.br/dinamico"
+          aria-label="Ir para a aplicação"
+          class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full
+                border border-white/20 bg-background-landingButton
                 hover:bg-highlight-cyan hover:text-background-landing mt-6 mx-auto"
         >
-          Ver nossos temas
+          Visite a aplicação
           <img src={arrowDown.src} alt="" aria-hidden="true" class="h-5 w-5" />
-        </button>
+        </a>
+
+        <a
+          onclick="window.location.href='doc'"
+          aria-label="Acessar documentação do Gêmeo Digital"
+          class="reveal flex items-center justify-center gap-2 px-8 py-3 rounded-full
+                border border-white/20 bg-background-landingButton
+                hover:bg-highlight-cyan hover:text-background-landing transition mt-6 mx-auto"
+        >
+          Documentação
+          <img
+            src={arrowDown.src}
+            aria-hidden="true"
+            class="h-5 w-5 -rotate-90"
+          />
+        </a>
       </nav>
 
       <section
@@ -88,16 +104,39 @@ const indicadores = [
         }
       </section>
 
-      <nav class="hidden md:block" aria-label="Navegação principal">
-        <button
-          onclick="document.getElementById('temas').scrollIntoView({ behavior: 'smooth' })"
-          aria-label="Ir para a seção de temas"
-          class="flex items-center justify-center md:justify-start gap-2 px-6 py-3 rounded-full border border-white/20 bg-background-landingButton
-                hover:bg-highlight-cyan hover:text-background-landing mt-6 mx-auto md:mx-0"
+      <nav class="hidden md:flex gap-4" aria-label="Navegação principal">
+        <a
+          href="https://gemeo.niteroi.rj.gov.br/dinamico"
+          aria-label="Ir para a aplicação"
+          class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full
+                border border-white/20 bg-background-landingButton
+                hover:bg-highlight-cyan hover:text-background-landing mt-4"
         >
-          Ver nossos temas
-          <img src={arrowDown.src} alt="" aria-hidden="true" class="h-5 w-5" />
-        </button>
+          Visite a nossa aplicação
+          <img
+            src={arrowDown.src}
+            alt=""
+            aria-hidden="true"
+            class="h-5 w-5 rotate-180"
+          />
+        </a>
+
+        <a
+          onclick="window.location.href='doc'"
+          aria-label="Acessar documentação do Gêmeo Digital"
+          class="reveal flex items-center justify-center gap-2 px-6 py-3 rounded-full
+                 border border-white/20 bg-background-landingButton
+                 hover:cursor-pointer
+                 hover:bg-highlight-cyan hover:text-background-landing mt-4"
+        >
+          Documentação
+          <img
+            src={arrowDown.src}
+            alt=""
+            aria-hidden="true"
+            class="h-5 w-5 -rotate-90"
+          />
+        </a>
       </nav>
     </article>
 
@@ -110,8 +149,35 @@ const indicadores = [
         alt="Ilustração do Gêmeo Digital mostrando uma cidade conectada por dados"
         class="w-auto mx-auto md:mx-0"
         format="avif"
-        widths={[400, 800, 1200]}
       />
     </figure>
   </div>
 </section>
+<script>
+  const DATA_BASE = new Date("2025-11-01T00:00:00Z").getTime();
+
+  const INTERVALO = 30 * 1000;
+  function getContadorInicial() {
+    const agora = Date.now();
+    const diff = agora - DATA_BASE;
+    return Math.floor(diff / INTERVALO);
+  }
+
+  let contador = getContadorInicial();
+
+  function atualizarHero() {
+    const cards = document.querySelectorAll(
+      "[aria-label='interações de dados'] h3"
+    );
+    cards.forEach((el) => {
+      el.textContent = `${contador.toLocaleString("pt-BR")} +`;
+    });
+  }
+
+  atualizarHero();
+
+  setInterval(() => {
+    contador++;
+    atualizarHero();
+  }, INTERVALO);
+</script>
